@@ -19,6 +19,7 @@ sim_options = {'name': 'pearson',
 avg_rmse = []
 avg_mae = []
 all_k = []
+
 for i in range(2,102,2):
   print('k = ',i)
   all_k.append(i)
@@ -30,9 +31,6 @@ for i in range(2,102,2):
 
 print("min rmse k:", avg_rmse.index(min(avg_rmse)))
 print("min mae k:", avg_mae.index(min(avg_mae)))
-
-
-
 
 plt.plot(all_k,avg_rmse)
 plt.savefig('plot/rmse_k.png')
