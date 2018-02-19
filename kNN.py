@@ -6,6 +6,7 @@ from surprise.prediction_algorithms.knns import KNNWithMeans
 from surprise.similarities import pearson
 import matplotlib.pyplot as plt
 from surprise.model_selection.split import KFold
+from surprise import accuracy
 import numpy as np
 
 file_path = os.path.expanduser('ml-latest-small/ratings_new.csv')
