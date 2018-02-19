@@ -16,29 +16,19 @@ data = Dataset.load_from_file(file_path, reader=reader)
 sim_options = {'name': 'pearson',
               'user_based': False
               }
-
 avg_rmse = []
 avg_mae = []
 all_k = []
-
-kf = KFold(n_splits=10)
 for i in range(2,102,10):
   print('k = ',i)
   all_k.append(i)
   knn = KNNWithMeans(k=i, sim_options=sim_options)
-  # output = cross_validate(knn, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True)
-  # avg_rmse.append(np.mean(output['test_rmse']))
-  # avg_mae.append(np.mean(output['test_mae']))
-  rmse=[]
-  mae=[]
-  accuracy=[]
-  for trainset, testset in kf.split(data):
-    knn.fit(trainset)
-    predict = knn.test(testset)
-    rmse.append(accuracy.rmse(predict, verbose=True))
-    mae.append(accuracy.mae(predict, verbose=True))
-  avg_rmse.append(np.means(rmse))
-  avg_mae.append(np.means(mae))
+  output = cross_validate(knn, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True)
+  avg_rmse.append(np.mean(output['test_rmse']))
+  avg_mae.append(np.mean(output['test_mae']))
+
+print(avg_rmse.index(min(avg_rmse)))
+print(avg_mae.index(min(avg_mae)))
 
 plt.plot(all_k,avg_rmse)
 plt.savefig('plot/rmse_k.png')
