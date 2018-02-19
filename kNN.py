@@ -6,6 +6,7 @@ from surprise.prediction_algorithms.knns import KNNWithMeans
 from surprise.similarities import pearson
 import matplotlib.pyplot as plt
 from surprise.model_selection.split import KFold
+from surprise import accuracy
 import numpy as np
 
 file_path = os.path.expanduser('ml-latest-small/ratings_new.csv')
@@ -31,7 +32,6 @@ for i in range(2,102,10):
   # avg_mae.append(np.mean(output['test_mae']))
   rmse=[]
   mae=[]
-  accuracy=[]
   for trainset, testset in kf.split(data):
     knn.fit(trainset)
     predict = knn.test(testset)
