@@ -26,6 +26,21 @@ with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
 
 csvfile.close()
 
+with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
+  content = csv.reader(csvfile)
+
+  with open("ml-latest-small/ratings_unpopular.csv", "wb") as file:
+    writer = csv.writer(file)
+    for row in content:
+      userId, movId, rating, name = row[0], row[1], row[2], row[3]
+      if dic[movId] < 3:
+        writer.writerow([userId, movId, rating, name])
+        print(userId,movId,rating)
+  file.close()
+
+
+csvfile.close()
+
   # with open("ml-latest-small/movies_new.csv", "wb") as file:
   #   writer = csv.writer(file)
   #   dic = {}
