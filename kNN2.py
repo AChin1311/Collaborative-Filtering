@@ -21,7 +21,7 @@ avg_rmse = []
 avg_mae = []
 all_k = []
 
-for i in range(2,102,10):
+for i in range(2,102,2):
   print('k = ',i)
   all_k.append(i)
   knn = KNNWithMeans(k=i, sim_options=sim_options)
