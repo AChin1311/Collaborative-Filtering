@@ -26,9 +26,7 @@ for i in range(2,101,2):
   print('k = ',i)
   all_k.append(i)
   knn = KNNWithMeans(k=i, sim_options=sim_options)
-  # output = cross_validate(knn, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True)
-  # avg_rmse.append(np.mean(output['test_rmse']))
-  # avg_mae.append(np.mean(output['test_mae']))
+
   rmse=[]
   mae=[]
   for trainset, testset in kf.split(data):
