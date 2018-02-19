@@ -5,6 +5,7 @@ from surprise.model_selection import cross_validate
 from surprise.prediction_algorithms.knns import KNNWithMeans
 from surprise.similarities import pearson
 import matplotlib.pyplot as plt
+import numpy as np
 
 file_path = os.path.expanduser('ml-latest-small/ratings_new.csv')
 reader = Reader(sep=',')
@@ -18,13 +19,18 @@ sim_options = {'name': 'pearson',
 avg_rmse = []
 avg_mae = []
 all_k = []
-for i in range(2,102,10):
+for i in range(2,102,2):
   print('k = ',i)
   all_k.append(i)
-  algo = KNNWithMeans(k=i, sim_options=sim_options)
-  output = cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True)
-  avg_rmse.append(sum(output['test_rmse'])/len(output['test_rmse']))
-  avg_mae.append(sum(output['test_mae'])/len(output['test_mae']))
+  algo = KNNWithMeans(k=i)
+  output = cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True, n_jobs=1)
+  avg_rmse.append(np.mean(output['test_rmse']))
+  avg_mae.append(np.mean(output['test_mae']))
+
+print("min rmse k:", avg_rmse.index(min(avg_rmse)))
+print("min mae k:", avg_mae.index(min(avg_mae)))
+
+
 
 plt.plot(all_k,avg_rmse)
 plt.savefig('plot/rmse_k.png')
