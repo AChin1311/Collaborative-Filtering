@@ -1,4 +1,5 @@
 import csv
+
 with open("ml-latest-small/movies.csv", "r") as csvfile:
   content = csv.reader(csvfile)
 
