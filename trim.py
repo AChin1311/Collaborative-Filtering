@@ -1,14 +1,17 @@
 import csv
 
 dic = {}
+dic_rate = {}
 with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
   content = csv.reader(csvfile)
   for row in content:
     user, movie, rate = row[0], row[1], row[2]
     if movie not in dic:
       dic[movie] = 1
+      dic_rate[movie] = rate
     else:
       dic[movie] += 1 
+      dic_rate[movie] = 10
 csvfile.close()
 
 with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
@@ -20,7 +23,7 @@ with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
       userId, movId, rating, name = row[0], row[1], row[2], row[3]
       if dic[movId] > 2:
         writer.writerow([userId, movId, rating, name])
-        print(userId,movId,rating)
+        
   file.close()
 
 
@@ -35,7 +38,22 @@ with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
       userId, movId, rating, name = row[0], row[1], row[2], row[3]
       if dic[movId] < 3:
         writer.writerow([userId, movId, rating, name])
-        print(userId,movId,rating)
+        
+  file.close()
+
+
+csvfile.close()
+
+with open("ml-latest-small/ratings_new.csv", "r") as csvfile:
+  content = csv.reader(csvfile)
+
+  with open("ml-latest-small/ratings_var.csv", "wb") as file:
+    writer = csv.writer(file)
+    for row in content:
+      userId, movId, rating, name = row[0], row[1], row[2], row[3]
+      if dic[movId] > 4 and dic_rate[movId] == 10:
+        writer.writerow([userId, movId, rating, name])
+        
   file.close()
 
 
