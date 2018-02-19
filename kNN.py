@@ -22,6 +22,7 @@ all_k = []
 for i in range(2,102,2):
   print('k = ',i)
   all_k.append(i)
+
   algo = KNNWithMeans(k=i)
   output = cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True, n_jobs=1)
   avg_rmse.append(np.mean(output['test_rmse']))
@@ -29,6 +30,7 @@ for i in range(2,102,2):
 
 print("min rmse k:", avg_rmse.index(min(avg_rmse)))
 print("min mae k:", avg_mae.index(min(avg_mae)))
+
 
 
 
