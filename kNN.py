@@ -13,7 +13,7 @@ data = Dataset.load_from_file(file_path, reader=reader)
 # data = Dataset.load_builtin('ml-100k')
 
 sim_options = {'name': 'pearson',
-              'user_based': False
+              'user_based': True
               }
 
 avg_rmse = []
