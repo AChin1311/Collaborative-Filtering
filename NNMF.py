@@ -28,6 +28,9 @@ for i in range(2,52,2):
   avg_rmse.append(np.mean(output['test_rmse']))
   avg_mae.append(np.mean(output['test_mae']))
 
+print("min rmse k:", avg_rmse.index(min(avg_rmse)))
+print("min mae k:", avg_mae.index(min(avg_mae)))
+
 plt.plot(all_k,avg_rmse)
 plt.savefig('plot/nmf_rmse_k.png')
 plt.clf()
