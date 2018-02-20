@@ -3,7 +3,7 @@ from surprise import Dataset
 from surprise import Reader
 from surprise.model_selection import cross_validate
 from surprise.similarities import pearson
-from surprise.prediction_algorithms.matrix_factorization import NMF
+from surprise.prediction_algorithms.matrix_factorization import SVD
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -22,11 +22,14 @@ all_k = []
 for i in range(2,52,2):
   print('k = ',i)
   all_k.append(i)
-  nmf = NMF(n_factors=i, biased=True)
-  output = cross_validate(nmf, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True)
+  mf = SVD(n_factors=i)
+  output = cross_validate(mf, data, measures=['RMSE', 'MAE'], cv=10,  verbose=True)
   
   avg_rmse.append(np.mean(output['test_rmse']))
   avg_mae.append(np.mean(output['test_mae']))
+
+print("min rmse k:", avg_rmse.index(min(avg_rmse)))
+print("min mae k:", avg_mae.index(min(avg_mae)))
 
 plt.plot(all_k,avg_rmse)
 plt.savefig('plot/mf_rmse_k.png')

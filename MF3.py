@@ -4,6 +4,8 @@ from surprise import Reader
 from surprise.model_selection import cross_validate
 from surprise.model_selection.split import train_test_split
 from surprise.prediction_algorithms.knns import KNNWithMeans
+from surprise.prediction_algorithms.matrix_factorization import NMF
+from surprise.prediction_algorithms.matrix_factorization import SVD
 from surprise.similarities import pearson
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,7 +24,7 @@ def plot_roc(y_true, y_estimate, threshold):
 	plt.ylabel('True Positive Rate',fontsize=15)
 
 	plt.legend(loc = "lower right")
-	plt.savefig('plot/q15_knn_roc_' + str(threshold) + '.png')
+	plt.savefig('plot/q29_mf_roc_' + str(threshold) + '.png')
 	plt.clf()
 
 if __name__ == "__main__":
@@ -38,7 +40,7 @@ if __name__ == "__main__":
 	trainset, testset = train_test_split(data, test_size=0.1)
 
 	for th in threshold:
-		algo = KNNWithMeans(k=34, sim_options=sim_options)
+		algo = SVD(n_factors=14)
 		algo.fit(trainset)
 		predictions = algo.test(testset)
 
@@ -53,5 +55,6 @@ if __name__ == "__main__":
 			y_estimate.append(row[3])
 
 		plot_roc(y_true,y_estimate, th)
+
 
 
