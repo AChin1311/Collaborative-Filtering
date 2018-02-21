@@ -9,9 +9,9 @@ with open("ml-latest-small/movies.csv", "r") as csvfile:
     dic = {}
     i = 0
     for row in content:
-      id, name = row[0], row[1]
+      id, name, types = row[0], row[1], row[2]
       dic[id] = (i, name)
-      writer.writerow([i, name])
+      writer.writerow([i, name, types])
       i += 1
   file.close()
 csvfile.close()
