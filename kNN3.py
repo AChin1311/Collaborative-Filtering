@@ -54,4 +54,38 @@ if __name__ == "__main__":
 
 		plot_roc(y_true,y_estimate, th)
 
+	for th in threshold:
+		algo = NMF(n_factors=16)
+		algo.fit(trainset)
+		predictions = algo.test(testset)
+
+		y_true = []
+		y_estimate = []
+
+		for row in predictions:
+			if row[2] >= th:
+				y_true.append(1)
+			else:
+				y_true.append(0)
+			y_estimate.append(row[3])
+
+		plot_roc(y_true,y_estimate, th)
+
+	for th in threshold:
+		algo = SVD(n_factors=14)
+		algo.fit(trainset)
+		predictions = algo.test(testset)
+
+		y_true = []
+		y_estimate = []
+
+		for row in predictions:
+			if row[2] >= th:
+				y_true.append(1)
+			else:
+				y_true.append(0)
+			y_estimate.append(row[3])
+
+		plot_roc(y_true,y_estimate, th)
+
 
