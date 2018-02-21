@@ -32,11 +32,11 @@ print("min rmse k:", avg_rmse.index(min(avg_rmse)))
 print("min mae k:", avg_mae.index(min(avg_mae)))
 
 plt.plot(all_k,avg_rmse)
-plt.savefig('plot/mf_rmse_k_pop.png')
+plt.savefig('plot/Q26_mf_rmse_k_pop.png')
 plt.clf()
 
 plt.plot(all_k,avg_mae)
-plt.savefig('plot/mf_mae_k_pop.png')
+plt.savefig('plot/Q26_mf_mae_k_pop.png')
 plt.clf()
 
 
