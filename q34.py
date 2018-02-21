@@ -61,11 +61,11 @@ if __name__ == "__main__":
 	roc_auc2 = auc(fpr2,tpr2)
 	roc_auc3 = auc(fpr3,tpr3)
 	plt.figure()
-	plt.plot(fpr1, tpr1, lw=2, label= 'area under curve = %0.4f' % roc_auc1)
+	plt.plot(fpr1, tpr1, lw=2, label= 'KNN: area under curve = %0.4f' % roc_auc1)
 	plt.grid(color='0.2', linestyle='--', linewidth=1)
-	plt.plot(fpr2, tpr2, lw=2, label= 'area under curve = %0.4f' % roc_auc2)
+	plt.plot(fpr2, tpr2, lw=2, label= 'NNMF: area under curve = %0.4f' % roc_auc2)
 	plt.grid(color='0.5', linestyle='--', linewidth=1)
-	plt.plot(fpr3, tpr3, lw=2, label= 'area under curve = %0.4f' % roc_auc3)
+	plt.plot(fpr3, tpr3, lw=2, label= 'MF: area under curve = %0.4f' % roc_auc3)
 	plt.grid(color='0.7', linestyle='--', linewidth=1)
 	plt.xlim([-0.1, 1.1])
 	plt.ylim([0.0, 1.05])
@@ -74,7 +74,7 @@ if __name__ == "__main__":
 	plt.legend(loc = "lower right")
 
 
-	plt.savefig('plot/all_roc_' + str(threshold) + '.png')
+	plt.savefig('plot/q34_all_roc_' + str(threshold) + '.png')
 	plt.clf()
 
 
