@@ -30,7 +30,9 @@ for i in range(2,102,2):
   avg_mae.append(np.mean(output['test_mae']))
 
 print("min rmse k:", avg_rmse.index(min(avg_rmse)))
+print("min rmse:", min(avg_rmse))
 print("min mae k:", avg_mae.index(min(avg_mae)))
+print("min mae:", min(avg_mae))
 
 plt.plot(all_k,avg_rmse)
 plt.savefig('plot/Q12_rmse_k_pop.png')
