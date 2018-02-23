@@ -1,6 +1,3 @@
-
-# coding: utf-8
-
 import numpy as np
 from surprise import Dataset
 from surprise import Reader
@@ -11,6 +8,8 @@ import matplotlib.pyplot as plt
 from surprise.prediction_algorithms.knns import KNNWithMeans
 from surprise.prediction_algorithms.matrix_factorization import NMF
 from surprise.prediction_algorithms.matrix_factorization import SVD
+plt.close('all')
+
 
 reader = Reader(sep=',')
 data = Dataset.load_from_file('./ml-latest-small/ratings_new.csv', reader=reader)
@@ -55,18 +54,23 @@ def RankSweep(algo, tit, num):
 
     pre_all /= 10
     rec_all /= 10
+    plt.figure()
     plt.plot(t_all, pre_all)
     plt.xlabel('t')
     plt.ylabel('precision')
     plt.title('precision vs t for {}'.format(tit))
     plt.savefig('plot/Q{}_precision_t.png'.format(num))
     plt.show()
+    
+    plt.figure()
     plt.plot(t_all, rec_all)
     plt.xlabel('t')
     plt.ylabel('recall')
     plt.title('recall vs t for {}'.format(tit))
     plt.savefig('plot/Q{}_recall_t.png'.format(num))
     plt.show()
+    
+    plt.figure()    
     plt.plot(rec_all, pre_all)
     plt.xlabel('recall')
     plt.ylabel('precision')
@@ -79,6 +83,7 @@ r_p1 = RankSweep(algo1, 'KNN', 36)
 r_p2 = RankSweep(algo2, 'NNMF', 37)
 r_p3 = RankSweep(algo3, 'MF with bias', 38)
 
+plt.figure()
 plt.plot(*r_p1)
 plt.plot(*r_p2)
 plt.plot(*r_p3)
