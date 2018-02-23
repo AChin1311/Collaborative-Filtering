@@ -1,4 +1,6 @@
 
+Files included in the folder:
+
 reID.py
 Reassign the idices of movies (using python 2)
 ratings_new.csv
